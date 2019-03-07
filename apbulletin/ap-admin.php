@@ -1,5 +1,6 @@
 <?php require_once("includes/session.php");?>
 <?php require_once("includes/functions.php");?>
+<?php require_once("includes/constants.php");?>
 <?php confirm_logged_in(); ?>
 <?php include("includes/header.php"); ?>
     <table id="structure">
@@ -12,7 +13,14 @@
         <p>Welcome to the Admin area, <?php echo "<b>" . $_SESSION['username'] . "</b>" ; ?></p>
         <ul>
           <li><a href="content.php">Manage Website Content</a></li>
-          <li><a href="new_user.php">Add Admin User</a></li>
+          <?php 
+            if($_SESSION['role_id'] == EDITOR){
+              echo '<li style="display:none;"><a href="new_user.php">Add Admin User</a></li>';
+            }else{
+              echo '<li><a href="new_user.php">Add Admin User</a></li>';
+            } 
+          ?>
+          
           <li><a href="logout.php">Logout</a></li>
         </ul>
       </td>

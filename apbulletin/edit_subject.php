@@ -110,7 +110,7 @@
             echo urlencode($sel_subject["id"]) ; ?>
           " onclick="return confirm('Are you sure');">Delete Subject</a>
         </form>
-        </br/>
+        <br/>
         <a href="content.php">Cancel</a>
         <br/><br/>
         <hr>

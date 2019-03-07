@@ -29,6 +29,14 @@
           }
 	}
 
+  function get_roles($public = true){
+		global $connection;
+		$sql = "SELECT id,name FROM roles";
+		$result = mysql_query($sql);
+    confirm_query($result);
+    return($result);
+  }
+
 	function get_all_subjects($public = true){
 		global $connection;
 		$query = "SELECT * 
@@ -40,8 +48,8 @@
     $subject_set = mysql_query($query, $connection);
     confirm_query($subject_set);
     return($subject_set);
-	}
-
+  }
+  
   function get_all_pages(){
     global $connection;
     $query = "SELECT * 
@@ -64,7 +72,8 @@
     $page_set = mysql_query($query, $connection);
     confirm_query($page_set);
     return ($page_set);
-	}
+  }
+  
 
   function get_subject_by_id($subject_id){
     global $connection;

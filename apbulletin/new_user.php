@@ -2,6 +2,7 @@
 <?php require_once("includes/connection.php");?>
 <?php require_once("includes/functions.php"); ?>
 <?php confirm_logged_in(); ?>
+<?php confirm_role(); ?>
 <?php find_selected_user(); ?>
 <?php
 	include_once("includes/form_functions.php");
@@ -19,18 +20,19 @@
 
 	$username = trim(mysql_prep($_POST['username']));
     $password = trim(mysql_prep($_POST['password']));
+    $role = trim(mysql_prep($_POST['role']));
     $hashed_password = sha1($password);
 
     if (empty($errors)) {
        $query = "INSERT INTO users ( 
-       				  username, hashed_password 
+       				  username, hashed_password, role_id 
        			  ) VALUES (
-       			  	  '{$username}', '{$hashed_password}' 
+       			  	  '{$username}', '{$hashed_password}', '{$role}' 
        			   	)";
     $result = mysql_query($query, $connection);
     if ($result) {
       $message = "The user was successfully created.";
-    } else{
+    }else{
       $message = "The user could not be created.";
       $message .= "<br/>" . mysql_error();
     }
@@ -67,8 +69,21 @@
 			<p>Username:
 			<input type="text" name="username" maxlength="30" 
 					value="<?php echo htmlentities($username); ?>" /></p>
+
+			<p>User Role:  
+				<select name="role">
+					<?php
+						$result = get_roles();
+						while ($row = mysql_fetch_array($result)) {
+								echo "<option value='" . $row['id'] ."'>" . $row['name'] ."</option>";
+						}
+					?>
+				</select>
+			</p>
+
 			<p>Password:
 			<input type="password" name="password" maxlength="30" value="<?php echo htmlentities($password); ?>" /></p><br/>
+			
 			<input type="submit" name="submit" value="Create User" />&nbsp;&nbsp;&nbsp;<a href="ap-admin.php">Cancel</a>
 		</form>
 	</td>
