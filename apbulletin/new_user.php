@@ -23,33 +23,43 @@
     $role = trim(mysql_prep($_POST['role']));
     $hashed_password = sha1($password);
 
-    if (empty($errors)) {
-       $query = "INSERT INTO users ( 
-       				  username, hashed_password, role_id 
-       			  ) VALUES (
-       			  	  '{$username}', '{$hashed_password}', '{$role}' 
-       			   	)";
-    $result = mysql_query($query, $connection);
-    if ($result) {
-      $message = "The user was successfully created.";
-    }else{
-      $message = "The user could not be created.";
-      $message .= "<br/>" . mysql_error();
-    }
-  
-   } else{
+  	if (empty($errors)) {
+			$query = "SELECT * ";
+    	$query .= "FROM users ";
+    	$query .= "WHERE username = '{$username}' ";
+    	$query .= "LIMIT 1";
+    	$result_set = mysql_query($query);
+			confirm_query($result_set);
+			// Checks if username already exits
+    	if (mysql_num_rows($result_set) == 1) {
+				$message = '<span style = "color:red;"><strong>*</strong></span>The username already exits';
+			}else{
+				$query = "INSERT INTO users ( 
+					username, hashed_password, role_id 
+				) VALUES (
+						'{$username}', '{$hashed_password}', '{$role}' 
+					)";
+				$result = mysql_query($query, $connection);
+				if ($result) {
+				$message = "The user was successfully created.";
+				}else{
+				$message = "The user could not be created.";
+				$message .= "<br/>" . mysql_error();
+				}
+			}
+  	}else{
       if (count($errors) == 1) {
            $message = "There was 1 error in the form.";
       } else {
            $message = "There were " . count($errors) . "errors in the form.";
-     }
-   }   // end of: if (empty($errors))
+     	}
+  	}   // end of: if (empty($errors))
 
 		
-} else {  // Form has not been submitted.
+	} else {  // Form has not been submitted.
 		$username = "";
 		$password = "";
-}
+	}
 
 ?>
 <?php include("includes/header.php"); ?>
