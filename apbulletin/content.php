@@ -8,8 +8,43 @@
     <tr>
       <td id="navigation">
         <?php echo navigation($sel_subject, $sel_page) ;  ?>
-        <a href="new_subject.php">+ Add a new subject</a>
+        <a href="new_subject.php">+ Add a new subject</a><br>
         <a href="ap-admin.php">+ Return to Menu</a>
+        <?php 
+            if($_SESSION['role_id'] == EDITOR){
+              echo '
+                  <div style="display:none; background-color: none; border: 1px solid white; padding: 5px; margin-top: 10px; font-size:12px;">
+                  <form action="includes/upload.php" method="POST" enctype="multipart/form-data">
+                    + Upload Logo:
+                    <input type="file" name="fileToUpload" id="fileToUpload">
+                    <hr>
+                    <input type="submit" value="Upload Image" name="submit" class="btn btn-default" style="color:whitesmoke; background-color: black; text-decoration: none; width: 100px;">
+                  </form>
+                  <?php
+                    if(!empty($msg)){
+                      echo $msg;
+                    }
+                  ?>
+                </div>
+              ';
+            }else{
+              echo '
+              <div style="background-color: none; border: 1px solid white; padding: 5px; margin-top: 10px; font-size:12px;">
+              <form action="includes/upload.php" method="POST" enctype="multipart/form-data">
+                + Upload Logo:
+                <input type="file" name="fileToUpload" id="fileToUpload">
+                <hr>
+                <input type="submit" value="Upload Image" name="submit" class="btn btn-default" style="color:whitesmoke; background-color: black; text-decoration: none; width: 100px;">
+              </form>
+              <?php
+                if(!empty($msg)){
+                  echo $msg;
+                }
+              ?>
+            </div>
+                ';
+            } 
+          ?>
       </td>
       <td id="page">
         <?php if(!is_null($sel_subject)) { // subject selected ?>

@@ -1,6 +1,6 @@
 <?php require_once("includes/session.php");?>
 <?php require_once("includes/functions.php");?>
-<?php require_once("includes/constants.php");?>
+
 <?php confirm_logged_in(); ?>
 <?php include("includes/header.php"); ?>
     <table id="structure">

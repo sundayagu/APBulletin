@@ -1,5 +1,5 @@
 <?php
-	// This file maintains all basic functions
+  // This file maintains all basic functions
 
   function mysql_prep( $value ){
   $magic_quotes_active = get_magic_quotes_gpc();
@@ -32,6 +32,14 @@
   function get_roles($public = true){
 		global $connection;
 		$sql = "SELECT id,name FROM roles";
+		$result = mysql_query($sql);
+    confirm_query($result);
+    return($result);
+  }
+
+  function get_logo($public = true){
+		global $connection;
+		$sql = "SELECT logo FROM users WHERE role_id = 1";
 		$result = mysql_query($sql);
     confirm_query($result);
     return($result);
