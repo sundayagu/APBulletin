@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 07, 2019 at 11:13 PM
+-- Generation Time: Mar 12, 2019 at 07:55 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -105,17 +105,18 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(30) NOT NULL,
   `hashed_password` varchar(40) NOT NULL,
-  `role_id` int(11) NOT NULL
+  `role_id` int(11) NOT NULL,
+  `logo` varchar(225) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `hashed_password`, `role_id`) VALUES
-(7, 'gabe', '5b09847fdc2bcc8c7c506df89bc8543d94b30bd6', 1),
-(8, 'vic', 'd08e44b51cf90c81cbec166bb24d43f4374dd612', 2),
-(10, 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 2);
+INSERT INTO `users` (`id`, `username`, `hashed_password`, `role_id`, `logo`) VALUES
+(7, 'gabe', '5b09847fdc2bcc8c7c506df89bc8543d94b30bd6', 1, 'logos/blockchain.png'),
+(8, 'vic', 'd08e44b51cf90c81cbec166bb24d43f4374dd612', 1, 'logos/blockchain.png'),
+(9, 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 2, '');
 
 --
 -- Indexes for dumped tables
@@ -168,7 +169,7 @@ ALTER TABLE `subjects`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
