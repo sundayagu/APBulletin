@@ -6,6 +6,7 @@
   <head>
     <title>KK Motins</title>
    <link href="styles/apstyles.css" media="all" rel="stylesheet" type="text/css">
+   <script src="ckeditor/ckeditorf/ckeditor.js"></script>
   </head>
   <body>
     <div id="header">
