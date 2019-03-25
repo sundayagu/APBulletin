@@ -46,13 +46,15 @@ if (!$new_page) {
     echo "" ; }?>" >
 </p>
 <p>Content:<br/>
-  <textarea name="content" cols="120" rows="200" maxlength="300000" id="comment">
+  <textarea name="content" cols="120" rows="200" maxlength="300000" >
     <?php 
       if (!$new_page) {
         echo $sel_page['content'];
       }?>
  </textarea>
  <script>
-    CKEDITOR.replace('comment');
+    
+    CKEDITOR.replace('content');
+    
   </script>
 </p><br/>
