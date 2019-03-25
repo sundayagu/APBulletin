@@ -76,7 +76,7 @@
       <td id="page">
         <h2>Edit Page: <?php echo htmlentities($sel_page['menu_name']) ; ?></h2>
         <?php if (!empty($message)) {
-                echo "<p class=\"message\">" . $message . "</p>";
+                echo "<span class=\"message\">" . $message . "</span>";
         } ?>
         <?php
         // Using function to list he fields that had errore
