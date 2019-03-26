@@ -4,7 +4,12 @@
 <?php confirm_logged_in(); ?>
 <?php find_selected_page(); ?>
 <?php include("includes/header.php"); ?>
-  <table id="structure">
+<style>
+  * {
+    line-height: 1.5;
+  }
+</style>
+<table id="structure">
     <tr>
       <td id="navigation">
         <?php echo navigation($sel_subject, $sel_page) ;  ?>
@@ -52,7 +57,8 @@
         <?php } elseif (!is_null($sel_page)) { // page selected ?>
             <h2><?php echo htmlentities($sel_page["menu_name"]); ?></h2>
             <div class = "page-content">
-              <?php echo  strip_tags(nl2br($sel_page["content"]), "<b><br><p><a><hr><i><u><h1><h2><h3><h4><h5><h6><center>" ) ;?>
+              <?php // echo  strip_tags(nl2br($sel_page["content"]), "<b><br><p><a><hr><i><u><h1><h2><h3><h4><h5><h6><center>" ) ;?>
+              <?php echo  $sel_page["content"] ;?>
             </div>
             <br/>
             <hr>
