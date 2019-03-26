@@ -1,5 +1,5 @@
 <?php
-	// This file maintains all basic functions
+  // This file maintains all basic functions
 
   function mysql_prep( $value ){
   $magic_quotes_active = get_magic_quotes_gpc();
@@ -29,6 +29,22 @@
           }
 	}
 
+  function get_roles($public = true){
+		global $connection;
+		$sql = "SELECT id,name FROM roles";
+		$result = mysql_query($sql);
+    confirm_query($result);
+    return($result);
+  }
+
+  function get_logo($public = true){
+		global $connection;
+		$sql = "SELECT logo FROM users WHERE role_id = 1";
+		$result = mysql_query($sql);
+    confirm_query($result);
+    return($result);
+  }
+
 	function get_all_subjects($public = true){
 		global $connection;
 		$query = "SELECT * 
@@ -40,8 +56,8 @@
     $subject_set = mysql_query($query, $connection);
     confirm_query($subject_set);
     return($subject_set);
-	}
-
+  }
+  
   function get_all_pages(){
     global $connection;
     $query = "SELECT * 
@@ -64,7 +80,8 @@
     $page_set = mysql_query($query, $connection);
     confirm_query($page_set);
     return ($page_set);
-	}
+  }
+  
 
   function get_subject_by_id($subject_id){
     global $connection;

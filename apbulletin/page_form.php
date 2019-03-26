@@ -46,10 +46,15 @@ if (!$new_page) {
     echo "" ; }?>" >
 </p>
 <p>Content:<br/>
-  <textarea name="content" cols="120" rows="200" maxlength="300000">
+  <textarea name="content" cols="120" rows="200" maxlength="300000" >
     <?php 
       if (!$new_page) {
-        echo strip_tags(nl2br($sel_page['content']), "<b><p><a><hr><i><u><h1><h2><h3><h4><h5><h6><center>");
+        echo $sel_page['content'];
       }?>
  </textarea>
+ <script>
+    
+    CKEDITOR.replace('content');
+    
+  </script>
 </p><br/>

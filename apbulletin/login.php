@@ -26,7 +26,7 @@
 
   if (empty($errors)) {
     	// Check database to see if username and the hashed password exist there.
-    	$query = "SELECT id, username ";
+    	$query = "SELECT id, username, role_id ";
     	$query .= "FROM users ";
     	$query .= "WHERE username = '{$username}' ";
     	$query .= "AND hashed_password = '{$hashed_password}' ";
@@ -39,6 +39,7 @@
     		$found_user = mysql_fetch_array($result_set);
     		$_SESSION['user_id'] = $found_user['id'];
         $_SESSION['username'] = $found_user['username'];
+        $_SESSION['role_id'] = $found_user['role_id']; // getting the role of the admin user
     		redirect_to("ap-admin.php");
     	} else {
     		// username/password combo was not found in the database

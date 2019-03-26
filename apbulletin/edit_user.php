@@ -2,6 +2,7 @@
 <?php require_once("includes/connection.php");?>
 <?php require_once("includes/functions.php"); ?>
 <?php confirm_logged_in(); ?>
+<?php confirm_role(); ?>
 <?php
 	include_once("includes/form_functions.php");
 
@@ -24,12 +25,14 @@
 	$id = mysql_prep($_GET['userid']);
 	$username = trim(mysql_prep($_POST['username']));
     $password = trim(mysql_prep($_POST['password']));
-    $hashed_password = sha1($password);
+    $role = trim(mysql_prep($_POST['role']));
+    $hashed_password = $password;
 
     if (empty($errors)) {
      $query = "UPDATE users SET 
                 username = '{$username}', 
-                hashed_password = '{$hashed_password}' 
+                hashed_password = '{$hashed_password}',
+                role_id = '{$role}' 
                 WHERE id = '{$id}' ";
     $result = mysql_query($query, $connection);
     if (mysql_affected_rows() == 1) {
@@ -85,6 +88,17 @@
 				<td><input type="password" name="password" maxlength="40" 
 					value="<?php echo htmlentities($sel_user['hashed_password']); ?>" /></td>
 			</tr>
+      <tr>
+        <td>User Role:</td>
+          <td><select name="role">
+            <?php
+              $result = get_roles();
+              while ($row = mysql_fetch_array($result)) {
+                  echo "<option value='" . $row['id'] ."'>" . $row['name'] ."</option>";
+              }
+            ?>
+          </select></td>
+      </tr>
 			<tr>
 				<td colspan="2" ><input type="submit" name="submit" value="Update User" />&nbsp;&nbsp;
           
